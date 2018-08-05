@@ -27,6 +27,8 @@
                             class="btn btn-primary btn-lg">Search</button>
                 </div>
             </div>
+            <div id="result">
+            </div>
         </form>
     </div>
 
@@ -55,10 +57,12 @@
             timeout : 100000,
             success : function(data) {
                 console.log("SUCCESS: ", data);
+                $("#result").text(data.price);
                // display(data);
             },
             error : function(e) {
                 console.log("ERROR: ", e);
+                $("#result").text("error");
                // display(e);
             },
             done : function(e) {

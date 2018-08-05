@@ -1,30 +1,47 @@
 package com.example.consumer.model;
 
-import java.util.Date;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Table("quote")
 public class Quote {
-    private Double price;
-    private Date timestamp;
+    @PrimaryKey
+    private QuoteKey key;
 
-    public Quote() {}
-    public Quote(Double price, Date timestamp) {
+    @Column("price")
+    private BigDecimal price;
+
+    public Quote(QuoteKey key, BigDecimal price) {
+        this.key = key;
         this.price = price;
-        this.timestamp = timestamp;
     }
 
-    public Double getPrice() {
+    public QuoteKey getKey() {
+        return key;
+    }
+
+    public void setKey(QuoteKey key) {
+        this.key = key;
+    }
+
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public static Quote of(QuoteProducer quoteProducer){
+        return new Quote(new QuoteKey(quoteProducer.getSrcId(), LocalDateTime.now()), quoteProducer.getPrice());
     }
 }
+
+/*
+https://dzone.com/articles/getting-started-with-spring-data-cassandra
+https://stackoverflow.com/questions/44448899/spring-data-for-apache-cassandra-converts-java-time-localdatetime-to-utc
+        */

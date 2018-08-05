@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 @Component
@@ -26,7 +27,7 @@ public class ProducerTask {
     public void generateQuote() {
         Random r = new Random();
         double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
-        Quote quote = new Quote(randomValue,new Date());
+        Quote quote = new Quote("1",new BigDecimal(randomValue).setScale(2, RoundingMode.CEILING));
         try{
             producerService.send(quote);
         } catch (JsonProcessingException je){

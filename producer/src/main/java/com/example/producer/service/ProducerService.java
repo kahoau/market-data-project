@@ -22,7 +22,7 @@ public class ProducerService {
     private String topic;
 
     public void send(Quote quote) throws JsonProcessingException {
-        log.info("The prices and timestamp is now {}, {}",quote.getPrice(), quote.getTimestamp() );
+        log.info("The price is now {}",quote.getPrice());
 
         //Object to JSON in String
         ObjectMapper mapper = new ObjectMapper();

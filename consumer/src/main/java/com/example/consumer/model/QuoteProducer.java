@@ -1,15 +1,15 @@
-package com.example.producer.model;
+package com.example.consumer.model;
 
 import java.math.BigDecimal;
 
-public class Quote {
+public class QuoteProducer {
     private String srcId;
     private BigDecimal price;
 
-    public Quote() {
+    public QuoteProducer() {
     }
 
-    public Quote(String srcId, BigDecimal price) {
+    public QuoteProducer(String srcId, BigDecimal price) {
         this.srcId = srcId;
         this.price = price;
     }
