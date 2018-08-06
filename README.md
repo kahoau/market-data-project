@@ -61,8 +61,8 @@ create a topic queue called "test" in kafka (this is only needed once)
  -- Go to the window start button, search for Cassandra cql shell and execute the following commands:
   CREATE KEYSPACE MarketData WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
   USE MarketData;
-  CREATE TABLE quote ( quote_id text, price decimal, ts timestamp, PRIMARY KEY (quote_id,ts) ) WITH CLUSTERING ORDER BY (ts DESC);
-  /* INSERT INTO quote (quote_id,price, ts) VALUES ('1',88.5, toTimestamp(now())); */
+  CREATE TABLE quote ( src_id text, price decimal, ts timestamp, PRIMARY KEY (src_id,ts) ) WITH CLUSTERING ORDER BY (ts DESC);
+  /* INSERT INTO quote (src_id,price, ts) VALUES ('1',88.5, toTimestamp(now())); */
   /* SELECT * FROM quote LIMIT 2;*/
 ## Reference
 https://www.guru99.com/download-install-cassandra.html
