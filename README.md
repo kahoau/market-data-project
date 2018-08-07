@@ -21,6 +21,8 @@ The goal of this mini application is to display the average of the last X prices
 Those 3 components are to be implemented as separate executables/processes.
 ## Architecture
 
+TODO: the reactive server part is not complete yet  
+
 ![alt text](./architecture.png)
 
 ## Java and maven setup
@@ -52,25 +54,33 @@ create a topic queue called "test" in kafka (this is only needed once)
  
 ### Cassandra setup
  
-  -- Download the Windows installer  
-   -- http://downloads.datastax.com/community/datastax-community-64bit_2.2.3.msi
-  -- Follow Datastax community edition setup steps at: https://www.guru99.com/download-install-cassandra.html
-   -- To me, DataStax is installed under C:\dev\softwares\DataStax Community
-  -- Then Cassandra should be up and running (and will auto-run on each window start up)
+ Download the Windows installer  
+  * http://downloads.datastax.com/community/datastax-community-64bit_2.2.3.msi  
+  * Follow Datastax community edition setup steps at: https://www.guru99.com/download-install-cassandra.html  
+  * To me, DataStax is installed under C:\dev\softwares\DataStax Community  
+  * Then Cassandra should be up and running (and will auto-run on each window start up)  
  
 ### Cassandra keyspace and table schema
- -- Go to the window start button, search for Cassandra cql shell and execute the following commands:
-  CREATE KEYSPACE MarketData WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
-  USE MarketData;
-  CREATE TABLE quote ( src_id text, price decimal, ts timestamp, PRIMARY KEY (src_id,ts) ) WITH CLUSTERING ORDER BY (ts DESC);
-  /* INSERT INTO quote (src_id,price, ts) VALUES ('1',88.5, toTimestamp(now())); */
-  /* SELECT * FROM quote LIMIT 2;*/
-## Reference
-https://www.guru99.com/download-install-cassandra.html
-https://dzone.com/articles/kafka-setup
-https://dzone.com/articles/running-apache-kafka-on-windows-os 
-https://medium.com/@cheron.antoine/tuto-building-a-reactive-restful-api-with-spring-webflux-java-258fd4dbae41
-https://stackoverflow.com/questions/26168859/cassandra-cql-how-to-select-the-last-n-rows-from-a-table 
-https://docs.datastax.com/en/cql/3.3/cql/cql_reference/cql_data_types_c.html
+
+ Go to the window start button, search for Cassandra cql shell and execute the following commands:  
+ CREATE KEYSPACE MarketData WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };  
+ USE MarketData;  
+ CREATE TABLE quote ( src_id text, price decimal, ts timestamp, PRIMARY KEY (src_id,ts) ) WITH CLUSTERING ORDER BY (ts DESC);  
+ INSERT INTO quote (src_id,price, ts) VALUES ('1',88.5, toTimestamp(now()));  
+ INSERT INTO quote (src_id,price, ts) VALUES ('1',84.5, toTimestamp(now()));   
+ INSERT INTO quote (src_id,price, ts) VALUES ('1',74.5, toTimestamp(now()));   
+ INSERT INTO quote (src_id,price, ts) VALUES ('1',60.0, toTimestamp(now()));   
+ SELECT * FROM quote LIMIT 2;  
+ 
+ The rows with prices 60.0, 74.5 should be displayed  
+ 
+## Reference  
+https://www.guru99.com/download-install-cassandra.html  
+https://dzone.com/articles/kafka-setup  
+https://dzone.com/articles/running-apache-kafka-on-windows-os  
+https://medium.com/@cheron.antoine/tuto-building-a-reactive-restful-api-with-spring-webflux-java-258fd4dbae41  
+https://stackoverflow.com/questions/26168859/cassandra-cql-how-to-select-the-last-n-rows-from-a-table   
+https://docs.datastax.com/en/cql/3.3/cql/cql_reference/cql_data_types_c.html  
+
 
  
