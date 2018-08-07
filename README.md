@@ -20,34 +20,35 @@ The goal of this mini application is to display the average of the last X prices
  
 Those 3 components are to be implemented as separate executables/processes.
 ## Architecture
+
 ![alt text](./architecture.png)
+
 ## Java and maven setup
- This assumes java8+ and maven 3.5+ are setup
- The user/system variables of %JAVA_HOME%, %MVN_HOME%, PATH=%JAVA_HOME%\bin;%MVN_HOME%\bin are setup 
- Eclipse/Intellij are setup to run the modules in IDE (or package those with mvn and run)
+
+ This assumes java8+ and maven 3.5+ are setup  
+ The user/system variables of %JAVA_HOME%, %MVN_HOME%, PATH=%JAVA_HOME%\bin;%MVN_HOME%\bin are setup  
+ Eclipse/Intellij are setup to run the modules in IDE (or package those with mvn and run)  
+
 ## kafka setup
-Follow the kafka setup guide at: 
- 
- https://dzone.com/articles/kafka-setup
-  -- Download ZooKeeper 
-   -- Extract the http://apache.01link.hk/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz to C:/dev/softwares/zookeeper-3.4.13
-   -- Inside the conf directory, rename the file zoo_sample.cfg to zoo.cfg
-   -- In zoo.cfg, change dataDir to  C:/dev/softwares/zookeeper-3.4.13/data
-  -- Download Kafka 
-   -- Extract https://www.apache.org/dyn/closer.cgi?path=/kafka/2.0.0/kafka_2.12-2.0.0.tgz to C:/dev/softwares/kafka_2.12-2.0.0
-   -- Go to the config directory. Open the file server.properties, change logDirs to log.dirs to C:/dev/softwares/kafka_2.12-2.0.0/kafka-logs
+Follow the kafka setup guide at: https://dzone.com/articles/kafka-setup  
+ Download ZooKeeper  
+   * Extract the http://apache.01link.hk/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz to C:/dev/softwares/zookeeper-3.4.13  
+   * Inside the conf directory, rename the file zoo_sample.cfg to zoo.cfg  
+   * In zoo.cfg, change dataDir to  C:/dev/softwares/zookeeper-3.4.13/data  
+ Download Kafka 
+  * Extract https://www.apache.org/dyn/closer.cgi?path=/kafka/2.0.0/kafka_2.12-2.0.0.tgz to C:/dev/softwares/kafka_2.12-2.0.0
+  * Go to the config directory. Open the file server.properties, change logDirs to log.dirs to C:/dev/softwares/kafka_2.12-2.0.0/kafka-logs  
    
-start zookeeper 
+start zookeeper  
+ C:\dev\softwares\zookeeper-3.4.13\zkserver  
 
- C:\dev\softwares\zookeeper-3.4.13\zkserver
+start kafka  
+ cd C:\dev\softwares\kafka_2.12-2.0.0  
+ .\bin\windows\kafka-server-start.bat .\config\server.properties  
 
-start kafka 
- cd C:\dev\softwares\kafka_2.12-2.0.0 
- .\bin\windows\kafka-server-start.bat .\config\server.properties
-
-create a topic queue called "test" in kafka (this is only needed once)
+create a topic queue called "test" in kafka (this is only needed once)  
  cd C:\dev\softwares\kafka_2.12-2.0.0\bin\windows 
- kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+ kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test  
  
 ### Cassandra setup
  
